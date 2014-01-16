@@ -1,0 +1,28 @@
+{
+  "name": "scroll_animation",
+  "main": "scroll_animation.js",
+  "version": "1.0.0",
+  "authors": [
+    "Jason Webster <jason@metalabdesign.com>"
+  ],
+  "description": "Efficient scroll position listening for animation tweening",
+  "keywords": [
+    "scroll",
+    "requestAnimationFrame",
+    "parallax"
+  ],
+  "dependencies": {
+    "jquery": "1.10.x"
+  },
+  "devDependencies": {
+    "coffee-script": "1.6.3"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
