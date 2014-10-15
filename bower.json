@@ -1,7 +1,7 @@
 {
   "name": "scroll_animation",
   "main": "scroll_animation.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     "Jason Webster <jason@metalabdesign.com>"
   ],
@@ -12,7 +12,7 @@
     "parallax"
   ],
   "dependencies": {
-    "jquery": "1.10.x"
+    "jquery": ">=1.10.0"
   },
   "devDependencies": {
     "coffee-script": "1.6.3"
