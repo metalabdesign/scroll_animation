@@ -16,7 +16,7 @@ class @ScrollAnimation
     scrollTop = document.documentElement.scrollTop or document.body.scrollTop
     return if scrollTop is lastTop
     for anim in ScrollAnimation.animations
-      anim?.animate(scrollTop, windowHeight, documentHeight)
+      anim?.animate(scrollTop, windowHeight, documentHeight, lastTop)
 
     lastTop = scrollTop
 
@@ -29,8 +29,6 @@ class @ScrollAnimation
   @register: (args...) ->
     if args[0] instanceof ScrollAnimation
       @animations.push(args[0])
-    # else
-      # TODO
 
   @remove: (instance) ->
     idx = @animations.indexOf instance
@@ -41,7 +39,7 @@ class @ScrollAnimation
     ScrollAnimation.refresh()
     $(window).on("resize", ScrollAnimation.refresh)
 
-    if Modernizr.touch
+    if Modernizr?.touch
       document.addEventListener("touchstart", update)
       document.addEventListener("touchmove", update)
       document.addEventListener("touchend", update)
@@ -49,9 +47,12 @@ class @ScrollAnimation
     run()
 
   @refresh: ->
-    windowHeight        = window.innerHeight
-    documentHeight      = $(document).height()
-    lastTop             = 0
+    body = document.body
+    html = document.documentElement
+
+    windowHeight   = window.innerHeight
+    documentHeight = Math.max(body.scrollHeight, body.offsetHeight, body.clientHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
+    lastTop        = 0
 
     anim.resize() for anim in ScrollAnimation.animations
     this
@@ -72,7 +73,7 @@ class @ScrollAnimation
     @height = @el.offsetHeight
     @end = @height + @start
 
-  animate: (scrollTop, windowHeight, documentHeight) ->
+  animate: (scrollTop, windowHeight, documentHeight, lastTop) ->
     unless (@start > scrollTop && @end < (scrollTop + windowHeight))
       if @state == STATE_ANIMATING
         @reset?()
@@ -80,4 +81,3 @@ class @ScrollAnimation
 
     @state = STATE_ANIMATING
     @animation.apply(this, Array::slice.call(arguments))
-
