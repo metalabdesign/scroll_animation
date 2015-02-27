@@ -29,8 +29,6 @@ class @ScrollAnimation
   @register: (args...) ->
     if args[0] instanceof ScrollAnimation
       @animations.push(args[0])
-    # else
-      # TODO
 
   @remove: (instance) ->
     idx = @animations.indexOf instance
@@ -41,7 +39,7 @@ class @ScrollAnimation
     ScrollAnimation.refresh()
     $(window).on("resize", ScrollAnimation.refresh)
 
-    if Modernizr.touch
+    if Modernizr?.touch
       document.addEventListener("touchstart", update)
       document.addEventListener("touchmove", update)
       document.addEventListener("touchend", update)
