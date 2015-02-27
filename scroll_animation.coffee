@@ -47,9 +47,12 @@ class @ScrollAnimation
     run()
 
   @refresh: ->
-    windowHeight        = window.innerHeight
-    documentHeight      = $(document).height()
-    lastTop             = 0
+    body = document.body
+    html = document.documentElement
+
+    windowHeight   = window.innerHeight
+    documentHeight = Math.max(body.scrollHeight, body.offsetHeight, body.clientHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
+    lastTop        = 0
 
     anim.resize() for anim in ScrollAnimation.animations
     this
@@ -78,4 +81,3 @@ class @ScrollAnimation
 
     @state = STATE_ANIMATING
     @animation.apply(this, Array::slice.call(arguments))
-
